@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Workout</title>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        background: #0a0a0a;
+        color: #fff;
+        min-height: 100vh;
+        padding: 24px;
+    }
+
+    .container {
+        max-width: 480px;
+        margin: 0 auto;
+    }
+
+    h1 {
+        font-size: 28px;
+        font-weight: 600;
+        margin-bottom: 8px;
+        letter-spacing: -0.5px;
+    }
+
+    .subtitle {
+        color: #888;
+        font-size: 15px;
+        margin-bottom: 32px;
+    }
+
+    .day-card {
+        background: linear-gradient(145deg, #151515, #1a1a1a);
+        border-radius: 16px;
+        padding: 20px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        transition: background 0.3s, transform 0.2s;
+    }
+
+    .day-card:hover {
+        transform: translateY(-2px);
+    }
+
+    .day-card:active {
+        background: #1a1a1a;
+    }
+
+    .day-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .day-title {
+        font-size: 18px;
+        font-weight: 600;
+        color: #ffd700;
+    }
+
+    .arrow {
+        color: #666;
+        transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        font-size: 20px;
+    }
+
+    .day-card.active .arrow {
+        transform: rotate(90deg);
+    }
+
+    .exercises {
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transition: max-height 0.6s ease, opacity 0.5s ease;
+    }
+
+    .day-card.active .exercises {
+        max-height: 5000px;
+        opacity: 1;
+    }
+
+    .exercise {
+        padding: 16px 0;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        animation: fadeSlide 0.5s ease forwards;
+    }
+
+    .exercise:last-child {
+        border-bottom: none;
+    }
+
+    .exercise:first-child {
+        padding-top: 20px;
+    }
+
+    .exercise-name {
+        font-size: 17px;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 8px;
+    }
+
+    .exercise-img {
+        width: 100%;
+        height: 220px;
+        object-fit: contain;
+        border-radius: 8px;
+        margin-bottom: 8px;
+        background: #222;
+    }
+
+    .exercise-tip {
+        font-size: 13px;
+        color: #aaa;
+        line-height: 1.5;
+    }
+
+    .soon {
+        margin-top: 16px;
+        padding: 12px;
+        background: #1a1a1a;
+        border-radius: 8px;
+    }
+
+    .soon-title {
+        font-size: 13px;
+        color: #666;
+        margin-bottom: 8px;
+    }
+
+    .soon-item {
+        font-size: 14px;
+        color: #888;
+        padding: 6px 0;
+    }
+
+    @keyframes fadeSlide {
+        0% { opacity: 0; transform: translateY(-10px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>Workout</h1>
+    <p class="subtitle">Kies je training</p>
+
+    <!-- Chest & Back -->
+    <div class="day-card" onclick="toggle(this)">
+        <div class="day-header">
+            <div class="day-title">Chest & Back</div>
+            <div class="arrow">›</div>
+        </div>
+        <div class="exercises">
+            <div class="exercise">
+                <div class="exercise-name">Dumbbell bench press</div>
+                <img class="exercise-img" loading="lazy" src="https://www.inspireusafoundation.org/file/2022/01/dumbbell-bench-press-variations.jpg" alt="Dumbbell bench press">
+                <div class="exercise-tip">Houd je schouderbladen naar achteren en beneden. Ellebogen 45 graden hoek voor optimale borst activatie.</div>
+            </div>
+            <div class="exercise">
+                <div class="exercise-name">Incline smith machine bench press</div>
+                <img class="exercise-img" loading="lazy" src="https://www.inspireusafoundation.org/file/2023/09/incline-barbell-bench-press-benefits.png" alt="Incline bench press">
+                <div class="exercise-tip">30-45 graden incline voor upper chest. Stang naar upper borst, niet naar nek.</div>
+            </div>
+            <div class="exercise">
+                <div class="exercise-name">Chest flys</div>
+                <img class="exercise-img" loading="lazy" src="https://www.inspireusafoundation.org/file/2023/11/pec-deck-machine-benefits.png" alt="Chest flys">
+                <div class="exercise-tip">Focus op stretch en squeeze. Lichte elleboogbuiging behouden, niet te zwaar.</div>
+            </div>
+            <div class="exercise">
+                <div class="exercise-name">Pullups</div>
+                <img class="exercise-img" loading="lazy" src="https://www.inspireusafoundation.org/file/2023/04/pull-up-benefits.png" alt="Pullups">
+                <div class="exercise-tip">Volle range of motion. Schouderbladen naar beneden en samen trekken.</div>
+            </div>
+            <div class="exercise">
+                <div class="exercise-name">Lat pulldown</div>
+                <img class="exercise-img" loading="lazy" src="https://www.inspireusafoundation.org/file/2022/08/lat-pulldown-benefits.jpg" alt="Lat pulldown">
+                <div class="exercise-tip">Trek naar borst, niet naar nek. Denk aan ellebogen naar beneden trekken.</div>
+            </div>
+            <div class="exercise">
+                <div class="exercise-name">Seated cable row</div>
+                <img class="exercise-img" loading="lazy" src="https://www.inspireusafoundation.org/file/2023/09/cable-row-benefits.png" alt="Cable row">
+                <div class="exercise-tip">Rechte rug, trek naar onderbuik. Squeeze je schouderbladen samen.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Shoulders & Arms -->
+    <div class="day-card" onclick="toggle(this)">
+        <div class="day-header">
+            <div class="day-title">Shoulders & Arms</div>
+            <div class="arrow">›</div>
+        </div>
+        <div class="exercises">
+            <div class="exercise">
+                <div class="exercise-name">Shoulder press machine</div>
+                <img class="exercise-img" loading="lazy" src="https://www.inspireusafoundation.org/file/2022/04/military-press-benefits.jpg" alt="Shoulder press">
+                <div class="exercise-tip">Druk recht omhoog, core strak. Niet te ver achter je hoofd.</div>
+            </div>
+            <div class="exercise">
+                <div class="exercise-name">Lateral raises</div>
+                <img class="exercise-img" loading="lazy" src="https://www.inspireusafoundation.org/file/2023/11/single-arm-cable-lateral-raise-benefits-1024x576.png" alt="Lateral raises">
+                <div class="exercise-tip">Licht gewicht, controlled. Til tot schouderhoogte, pinky omhoog.</div>
+            </div>
+            <div class="exercise">
+                <div class="exercise-name">Face pulls</div>
+                <img class="exercise-img" loading="lazy" src="https://www.inspireusafoundation.org/file/2023/06/face-pull-benefits.png" alt="Face pulls">
+                <div class="exercise-tip">Trek naar gezicht, ellebogen hoog. Essentieel voor shoulder health.</div>
+            </div>
+            <div class="exercise">
+                <div class="exercise-name">Bicep preacher curl</div>
+                <img class="exercise-img" loading="lazy" src="https://www.inspireusafoundation.org/file/2023/02/preacher-curl-benefits.jpg" alt="Preacher curl">
+                <div class="exercise-tip">Volle stretch onderaan, geen momentum. Ellebogen op pad houden.</div>
+            </div>
+            <div class="exercise">
+                <div class="exercise-name">Dumbbell curl</div>
+                <img class="exercise-img" loading="lazy" src="https://www.inspireusafoundation.org/file/2023/04/dumbbell-curl-benefits.png" alt="Dumbbell curl">
+                <div class="exercise-tip">Supinatie aan top (palm naar buiten draaien) voor max bicep activatie.</div>
+            </div>
+            <div class="exercise">
+                <div class="exercise-name">Hammer curl</div>
+                <img class="exercise-img" loading="lazy" src="https://www.inspireusafoundation.org/file/2022/05/bicep-curl-vs-hammer-curl.jpg" alt="Hammer curl">
+                <div class="exercise-tip">Neutrale grip, raakt brachialis. Controlled negatief voor beste gains.</div>
+            </div>
+            <div class="exercise">
+                <div class="exercise-name">Dips</div>
+                <img class="exercise-img" loading="lazy" src="https://www.inspireusafoundation.org/file/2023/08/dip-variations.png" alt="Dips">
+                <div class="exercise-tip">Voor triceps: blijf rechtop. Ga diep voor volle range of motion.</div>
+            </div>
+            <div class="exercise">
+                <div class="exercise-name">Skullcrushers</div>
+                <img class="exercise-img" loading="lazy" src="https://www.inspireusafoundation.org/file/2022/08/incline-vs-flat-bench-skullcrusher.jpg" alt="Skullcrushers">
+                <div class="exercise-tip">Ellebogen gefixeerd, alleen onderarm beweegt. Bescherm je ellebogen.</div>
+            </div>
+            <div class="exercise">
+                <div class="exercise-name">Tricep pushdown 1 arm behind back</div>
+                <img class="exercise-img" loading="lazy" src="https://www.inspireusafoundation.org/file/2023/03/trice-pushdown-benefits-1024x576.png" alt="Tricep pushdown">
+                <div class="exercise-tip">Raakt long head goed. Focus op squeeze onderaan.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Legs -->
+    <div class="day-card" onclick="toggle(this)">
+        <div class="day-header">
+            <div class="day-title">Legs</div>
+            <div class="arrow">›</div>
+        </div>
+        <div class="exercises">
+            <div class="exercise">
+                <div class="exercise-name">Hack squat</div>
+                <img class="exercise-img" loading="lazy" src="https://www.inspireusafoundation.org/file/2022/06/hack-squat-benefits.jpg" alt="Hack squat">
+                <div class="exercise-tip">Voeten iets hoger voor meer glute/hamstring. Knieën in lijn met tenen.</div>
+            </div>
+            <div class="exercise">
+                <div class="exercise-name">Leg curl</div>
+                <img class="exercise-img" loading="lazy" src="https://www.inspireusafoundation.org/file/2022/05/leg-curl-benefits.jpg" alt="Leg curl">
+                <div class="exercise-tip">Controlled negatief voor hamstring groei. Heupen plat op bench.</div>
+            </div>
+            <div class="exercise">
+                <div class="exercise-name">Leg extension</div>
+                <img class="exercise-img" loading="lazy" src="https://www.inspireusafoundation.org/file/2023/05/leg-extension-benefits.png" alt="Leg extension">
+                <div class="exercise-tip">Volle extensie met pause bovenaan. Perfect voor quad isolatie.</div>
+            </div>
+            <div class="soon">
+                <div class="soon-title">Later toevoegen bij minder spierpijn</div>
+                <div class="soon-item">Lunges</div>
+                <div class="soon-item">Leg press</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function toggle(card) {
+        const isActive = card.classList.contains('active');
+        document.querySelectorAll('.day-card').forEach(c => c.classList.remove('active'));
+        if (!isActive) card.classList.add('active');
+    }
+</script>
+</body>
+</html>
